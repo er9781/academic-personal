@@ -3,6 +3,8 @@
   "rules": {
     "semicolon": true,
     "no-duplicate-imports": true,
-    "triple-equals": true
+    "triple-equals": true,
+    "no-implicit-dependencies": false,
+    "no-submodule-imports": false
   }
 }
