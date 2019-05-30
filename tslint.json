@@ -1,8 +1,7 @@
 {
   "extends": ["tslint:latest", "tslint-config-prettier", "tslint-react"],
   "rules": {
-    "no-unused-variable": true,
-    "no-extra-semi": true,
+    "semicolon": true,
     "no-duplicate-imports": true,
     "triple-equals": true
   }
