@@ -6,8 +6,11 @@
   "author": "Simon Labute <labute.simon@gmail.com>",
   "dependencies": {
     "@babel/core": "^7.4.5",
+    "@types/react": "^16.8.19",
+    "@types/react-dom": "^16.8.4",
     "gatsby": "^2.7.5",
     "gatsby-image": "^2.1.2",
+    "gatsby-plugin-antd": "^2.0.2",
     "gatsby-plugin-manifest": "^2.1.1",
     "gatsby-plugin-offline": "^2.1.1",
     "gatsby-plugin-react-helmet": "^3.0.12",
