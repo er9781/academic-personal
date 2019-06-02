@@ -4,6 +4,10 @@
     "semicolon": true,
     "no-duplicate-imports": true,
     "triple-equals": true,
+    "jsx-no-lambda": false,
+    "jsx-alignment": false,
+    "jsx-no-multiline-js": false,
+    "object-literal-sort-keys": false,
     "no-implicit-dependencies": false,
     "no-submodule-imports": false
   }

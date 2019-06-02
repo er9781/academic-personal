@@ -1,9 +1,22 @@
+import { graphql, StaticQuery } from "gatsby";
 import PropTypes from "prop-types";
 import React from "react";
-import { graphql, StaticQuery } from "gatsby";
 
-import Header from "./header";
-import "./layout.css";
+import Header from "components/header";
+import "components/layout.css";
+import { author } from "config";
+
+const Footer = () => (
+  <footer
+    style={{
+      display: "flex",
+      justifyContent: "flex-end",
+      padding: "10px",
+      borderTop: "1px solid black",
+      background: "light-gray",
+    }}
+  >{`© ${new Date().getFullYear()} - ${author}`}</footer>
+);
 
 const Layout = ({ children }) => (
   <StaticQuery
@@ -17,10 +30,11 @@ const Layout = ({ children }) => (
       }
     `}
     render={data => (
-      <>
+      <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
         <Header siteTitle={data.site.siteMetadata.title} />
         <div
           style={{
+            flex: 1,
             margin: `0 auto`,
             maxWidth: 960,
             padding: `0px 1.0875rem 1.45rem`,
@@ -28,13 +42,9 @@ const Layout = ({ children }) => (
           }}
         >
           <main>{children}</main>
-          <footer>
-            © {new Date().getFullYear()}, Built with
-            {` `}
-            <a href="https://www.gatsbyjs.org">Gatsby</a>
-          </footer>
         </div>
-      </>
+        <Footer />
+      </div>
     )}
   />
 );
