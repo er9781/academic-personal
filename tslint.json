@@ -6,6 +6,8 @@
     "triple-equals": true,
     "jsx-no-lambda": false,
     "jsx-alignment": false,
+    "member-access": false,
+    "jsx-boolean-value": false,
     "jsx-no-multiline-js": false,
     "object-literal-sort-keys": false,
     "no-implicit-dependencies": false,

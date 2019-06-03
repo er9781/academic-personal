@@ -1,10 +1,11 @@
 import { graphql, StaticQuery } from "gatsby";
-import PropTypes from "prop-types";
 import React from "react";
 
-import Header from "components/header";
+import { Icon, Layout, Menu } from "antd";
 import "components/layout.css";
 import { author } from "config";
+
+// const { SubMenu } = Menu;
 
 const Footer = () => (
   <footer
@@ -18,39 +19,63 @@ const Footer = () => (
   >{`© ${new Date().getFullYear()} - ${author}`}</footer>
 );
 
-const Layout = ({ children }) => (
-  <StaticQuery
-    query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
-          }
-        }
-      }
-    `}
-    render={data => (
-      <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
-        <Header siteTitle={data.site.siteMetadata.title} />
-        <div
-          style={{
-            flex: 1,
-            margin: `0 auto`,
-            maxWidth: 960,
-            padding: `0px 1.0875rem 1.45rem`,
-            paddingTop: 0,
-          }}
+class MainLayout extends React.Component {
+  state = { collapsed: false };
+
+  render() {
+    // return (
+    //   <StaticQuery
+    //     query={graphql`
+    //       query SiteTitleQuery {
+    //         site {
+    //           siteMetadata {
+    //             title
+    //           }
+    //         }
+    //       }
+    //     `}
+    //     render={data => (
+    //       <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
+    //         <div
+    //           style={{
+    //             flex: 1,
+    //             margin: `0 auto`,
+    //             maxWidth: 960,
+    //             padding: `0px 1.0875rem 1.45rem`,
+    //             paddingTop: 0,
+    //           }}
+    //         >
+    //           <main>{this.props.children}</main>
+    //         </div>
+    //         <Footer />
+    //       </div>
+    //     )}
+    //   />
+    // );
+    return (
+      <Layout style={{ minHeight: "100vh" }}>
+        <Layout.Sider
+          collapsible
+          collapsed={this.state.collapsed}
+          onCollapse={collapsed => this.setState({ collapsed })}
         >
-          <main>{children}</main>
-        </div>
-        <Footer />
-      </div>
-    )}
-  />
-);
+          <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
+            <Menu.Item key="1">
+              <Icon type="pie-chart" />
+              <span>Option 1</span>
+            </Menu.Item>
+            <Menu.Item key="2">
+              <Icon type="desktop" />
+              <span>Option 2</span>
+            </Menu.Item>
+          </Menu>
+        </Layout.Sider>
+        <Layout>
+          <Layout.Content>{this.props.children}</Layout.Content>
+        </Layout>
+      </Layout>
+    );
+  }
+}
 
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
-export default Layout;
+export default MainLayout;
