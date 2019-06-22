@@ -1,14 +1,14 @@
 // import { graphql, StaticQuery } from "gatsby";
 import { Location } from "@reach/router";
 import { Icon, Layout, Menu } from "antd";
-import * as c from "common";
 import Image from "components/image";
 import "components/layout.css";
+import SEO from "components/seo";
 import { author, socials } from "config";
 import { Link } from "gatsby";
 import _ from "lodash";
 import React from "react";
-import { curUrls, routes } from "routing";
+import { curConfig, curNames, routes } from "routing";
 
 // const { SubMenu } = Menu;
 
@@ -64,28 +64,27 @@ class Sidebar extends React.Component {
 
   render() {
     return (
-      <>
-        <Layout.Sider
-          theme={"light"}
-          collapsible
-          collapsed={this.state.collapsed}
-          onCollapse={collapsed => this.setState({ collapsed })}
-        >
-          <div className={"picture"}>
-            <Image />
-          </div>
-          <Location>
-            {({ location }) => {
-              return (
-                <Menu theme="light" mode="inline" selectedKeys={curUrls(location.pathname)}>
-                  {links(location)}
-                </Menu>
-              );
-            }}
-          </Location>
-        </Layout.Sider>
-        ;
-      </>
+      <Location>
+        {({ location }) => {
+          const config = curConfig(location.pathname);
+          return (
+            <Layout.Sider
+              theme={"light"}
+              collapsible
+              collapsed={this.state.collapsed}
+              onCollapse={collapsed => this.setState({ collapsed })}
+            >
+              <SEO title={config.title} />
+              <div className={"picture"}>
+                <Image />
+              </div>
+              <Menu theme="light" mode="inline" selectedKeys={curNames(location.pathname)}>
+                {links(location)}
+              </Menu>
+            </Layout.Sider>
+          );
+        }}
+      </Location>
     );
   }
 }

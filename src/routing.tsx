@@ -1,9 +1,17 @@
 import _ from "lodash";
 
-// label, icon
-export const routes: { [name: string]: { url: string; icon: string; label: string } } = {
-  index: { icon: "pie-chart", label: "Home", url: "/" },
-  page2: { icon: "desktop", label: "Talks", url: "/page-2" },
+interface Config {
+  url: string;
+  icon: string;
+  label: string;
+  title: string;
+}
+
+
+// icons must be one of: https://ant.design/components/icon/
+export const routes: { [name: string]: Config } = {
+  index: { icon: "pie-chart", label: "Home", url: "/", title: "Home" },
+  research: { icon: "line-chart", label: "Research", url: "/research", title: "Research" },
 };
 
 const isCurrent = (curPath: string, to: string): boolean => {
@@ -11,8 +19,12 @@ const isCurrent = (curPath: string, to: string): boolean => {
   return path === to;
 };
 
-export const curUrls = (pathname): string[] => {
+export const curNames = (pathname): string[] => {
   return Object.keys(routes).filter(name => {
     return isCurrent(pathname, routes[name].url);
   });
+};
+
+export const curConfig = (pathname): Config => {
+  return Object.values(routes).filter(({ url }) => isCurrent(pathname, url))[0];
 };
