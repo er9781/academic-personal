@@ -1,21 +1,30 @@
 // import { graphql, StaticQuery } from "gatsby";
+import { Location } from "@reach/router";
 import { Icon, Layout, Menu } from "antd";
+import * as c from "common";
 import Image from "components/image";
 import "components/layout.css";
 import { author, socials } from "config";
+import { Link } from "gatsby";
 import _ from "lodash";
 import React from "react";
+import { curUrls, routes } from "routing";
 
 // const { SubMenu } = Menu;
 
+const socialToTheme = {
+  facebook: "filled",
+};
+
 const SocialIcons = () => {
+  const icons = Object.keys(socials);
   return (
-    Object.keys(socials).length > 0 && (
-      <div style={{marginLeft: "5px"}}>
-        {Object.keys(socials).map(social => (
+    icons.length > 0 && (
+      <div style={{ marginLeft: "5px" }}>
+        {icons.map(social => (
           <span key={social} style={{ padding: "3px" }}>
             <a target={"_blank"} href={socials[social]}>
-              <Icon type={social} />
+              <Icon type={social} theme={socialToTheme[social]} />
             </a>
           </span>
         ))}
@@ -39,12 +48,23 @@ const Footer = () => (
   </footer>
 );
 
-class MainLayout extends React.Component {
+const links = location => {
+  return _.map(routes, (config, name) => (
+    <Menu.Item key={name}>
+      <Link to={config.url}>
+        <Icon type={config.icon} />
+        <span>{config.label}</span>
+      </Link>
+    </Menu.Item>
+  ));
+};
+
+class Sidebar extends React.Component {
   state = { collapsed: false };
 
   render() {
     return (
-      <Layout style={{ minHeight: "100vh" }}>
+      <>
         <Layout.Sider
           theme={"light"}
           collapsible
@@ -54,17 +74,27 @@ class MainLayout extends React.Component {
           <div className={"picture"}>
             <Image />
           </div>
-          <Menu theme="light" defaultSelectedKeys={["1"]} mode="inline">
-            <Menu.Item key="1">
-              <Icon type="pie-chart" />
-              <span>Option 1</span>
-            </Menu.Item>
-            <Menu.Item key="2">
-              <Icon type="desktop" />
-              <span>Option 2</span>
-            </Menu.Item>
-          </Menu>
+          <Location>
+            {({ location }) => {
+              return (
+                <Menu theme="light" mode="inline" selectedKeys={curUrls(location.pathname)}>
+                  {links(location)}
+                </Menu>
+              );
+            }}
+          </Location>
         </Layout.Sider>
+        ;
+      </>
+    );
+  }
+}
+
+class MainLayout extends React.Component {
+  render() {
+    return (
+      <Layout style={{ minHeight: "100vh" }}>
+        <Sidebar />
         <Layout>
           <Layout.Content style={{ padding: "20px" }}>{this.props.children}</Layout.Content>
           <Layout.Footer style={{ padding: "20px" }}>

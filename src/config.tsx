@@ -1,6 +1,7 @@
 export const author = "Kelian Dascher-Cousineau";
 export const title = "PhD student";
 export const institution = "UC Santa Cruz";
+
 export const socials: {
   facebook?: string;
   medium?: string;
@@ -10,5 +11,6 @@ export const socials: {
   github?: string;
 } = {
   // twitter: "some-link-to-twitter",
+  facebook: "https://facebook.com/simon-labute",
   github: "https://github.com/er9781",
 };
