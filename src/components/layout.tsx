@@ -4,7 +4,7 @@ import { Icon, Layout, Menu } from "antd";
 import Image from "components/image";
 import "components/layout.css";
 import SEO from "components/seo";
-import { author, socials } from "config";
+import { author, institution, socials, title } from "config";
 import { Link } from "gatsby";
 import _ from "lodash";
 import React from "react";
@@ -48,6 +48,31 @@ const Footer = () => (
   </footer>
 );
 
+const Pic = () => (
+  <div className={"picture"}>
+    <Image />
+  </div>
+);
+
+const Blurb = () => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        padding: "10px",
+        textAlign: "right",
+      }}
+    >
+      <div style={{ fontWeight: "normal" }}>{author}</div>
+      <div style={{ fontSize: "10px", fontWeight: "lighter" }}>
+        {title} - {institution}
+      </div>
+    </div>
+  );
+};
+
 const links = location => {
   return _.map(routes, (config, name) => (
     <Menu.Item key={name}>
@@ -75,9 +100,8 @@ class Sidebar extends React.Component {
               onCollapse={collapsed => this.setState({ collapsed })}
             >
               <SEO title={config.title} />
-              <div className={"picture"}>
-                <Image />
-              </div>
+              <Pic />
+              <Blurb />
               <Menu theme="light" mode="inline" selectedKeys={curNames(location.pathname)}>
                 {links(location)}
               </Menu>

@@ -7,7 +7,6 @@ interface Config {
   title: string;
 }
 
-
 // icons must be one of: https://ant.design/components/icon/
 export const routes: { [name: string]: Config } = {
   index: { icon: "pie-chart", label: "Home", url: "/", title: "Home" },

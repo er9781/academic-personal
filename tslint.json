@@ -13,6 +13,7 @@
     "no-implicit-dependencies": false,
     "no-submodule-imports": false,
     "max-classes-per-file": false,
-    "jsx-wrap-multiline": false
+    "jsx-wrap-multiline": false,
+    "interface-name": false
   }
 }
