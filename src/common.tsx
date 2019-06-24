@@ -8,3 +8,6 @@ export const prn = x => (console.log(x), x);
 export const max = (arr, fn) => {
     return _.max((fn && _.map(arr,fn)) || arr);
 }
+
+export const second = arr => arr[1]
+export const first = arr => arr[0]

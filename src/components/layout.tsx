@@ -8,7 +8,7 @@ import { author, institution, socials, title } from "config";
 import { Link } from "gatsby";
 import _ from "lodash";
 import React from "react";
-import { curConfig, curNames, getTitle, routes } from "routing";
+import { Config, curConfig, curNames, getTitle, routes } from "routing";
 
 // const { SubMenu } = Menu;
 
@@ -74,14 +74,17 @@ const Blurb = () => {
 };
 
 const links = location => {
-  return _.map(routes, (config, name) => (
-    <Menu.Item key={name}>
-      <Link to={config.url}>
-        <Icon type={config.icon} />
-        <span>{config.label}</span>
-      </Link>
-    </Menu.Item>
-  ));
+  return routes.map(([name, config]) => {
+    const conf = config as Config;
+    return (
+      <Menu.Item key={name as string}>
+        <Link to={conf.url}>
+          <Icon type={conf.icon} />
+          <span>{conf.label}</span>
+        </Link>
+      </Menu.Item>
+    );
+  });
 };
 
 class Sidebar extends React.Component {
