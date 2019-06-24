@@ -8,7 +8,7 @@ import { author, institution, socials, title } from "config";
 import { Link } from "gatsby";
 import _ from "lodash";
 import React from "react";
-import { curConfig, curNames, routes } from "routing";
+import { curConfig, curNames, getTitle, routes } from "routing";
 
 // const { SubMenu } = Menu;
 
@@ -92,6 +92,7 @@ class Sidebar extends React.Component {
       <Location>
         {({ location }) => {
           const config = curConfig(location.pathname);
+          const pageTitle = getTitle(config);
           return (
             <Layout.Sider
               theme={"light"}
@@ -99,7 +100,7 @@ class Sidebar extends React.Component {
               collapsed={this.state.collapsed}
               onCollapse={collapsed => this.setState({ collapsed })}
             >
-              <SEO title={config.title} />
+              {pageTitle && <SEO title={pageTitle} />}
               <Pic />
               <Blurb />
               <Menu theme="light" mode="inline" selectedKeys={curNames(location.pathname)}>

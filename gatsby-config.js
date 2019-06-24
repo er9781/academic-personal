@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
     title: `Kelian Dascher-Cousineau`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    description: `Basic Personal Site`,
+    author: `@keliankaz`,
   },
   plugins: [
     `gatsby-plugin-antd`,
@@ -16,6 +16,14 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/pages`,
+        name: `markdown-pages`,
+      },
+    },
+    `gatsby-transformer-remark`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
